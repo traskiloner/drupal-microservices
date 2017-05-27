@@ -8,14 +8,14 @@ MAINTAINER "Alberto Andrades Gil" "alberto.andrades.gil@gmail.com"
 RUN apt update && apt upgrade -y && apt dist-upgrade -y
 
 #Install Apache Web Server and PHP dependencies
-RUN apt install apache2 libapache2-mod-fastcgi wget unzip
+RUN apt install apache2 libapache2-mod-fastcgi
 
 #Copy configuration files
--- COPY ./conf/
-COPY ./conf/drupal.conf /etc/apache2/sites-available
+COPY ./conf/php7.0-fpm.conf
+COPY ./conf/drupal.conf /etc/apache2/sites-available/
 
 #Setup web server
-RUN a2dissite 000-default && a2ensite drupal
+RUN a2enmod fastcgi actions alias && a2enconf php7.0-fpm && a2dissite 000-default && a2ensite drupal
 
 #Cleaning container
 RUN apt-get clean && \
@@ -26,7 +26,7 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 #Port to expose
-EXPOSE 443
+EXPOSE 80
 
 #Memory limit
 CMD ["-m","512"]
@@ -34,6 +34,6 @@ CMD ["-m","512"]
 #User to run apache master proccess
 USER root
 
-#Entrypoint
-ENTRYPOINT ["/docker-entrypoint"]
+#Run Apache Proccess
+CMD ["apache2ctl","-D","FOREGROUND"]
 
