@@ -8,7 +8,7 @@ MAINTAINER "Alberto Andrades Gil" "alberto.andrades.gil@gmail.com"
 RUN apt update && apt upgrade -y && apt dist-upgrade -y
 
 #Install Apache Web Server and PHP dependencies
-RUN apt install apache2 libapache2-mod-fastcgi
+RUN apt install apache2 libapache2-mod-fastcgi -y
 
 #Copy configuration files
 COPY ./conf/php7.0-fpm.conf /etc/apache2/conf-available/
