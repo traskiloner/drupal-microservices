@@ -11,7 +11,7 @@ RUN apt update && apt upgrade -y && apt dist-upgrade -y
 RUN apt install apache2 libapache2-mod-fastcgi
 
 #Copy configuration files
-COPY ./conf/php7.0-fpm.conf
+COPY ./conf/php7.0-fpm.conf /etc/apache2/conf-available/
 COPY ./conf/drupal.conf /etc/apache2/sites-available/
 
 #Setup web server
