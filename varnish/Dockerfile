@@ -8,11 +8,12 @@ MAINTAINER "Alberto Andrades Gil" "alberto.andrades.gil@gmail.com"
 RUN apt update && apt upgrade -y && apt dist-upgrade -y
 
 #Install Varnish Cache Server
-RUN apt install varnish
+RUN apt install varnish dnsutils -y
 
 #Copy configuration files
 COPY ./conf/docker-entrypoint /docker-entrypoint
 COPY ./conf/default.vcl /etc/varnish/default.vcl
+RUN chmod u+x /docker-entrypoint
 
 #Cleaning container
 RUN apt-get clean && \
