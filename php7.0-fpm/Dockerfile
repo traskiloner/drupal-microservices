@@ -11,11 +11,13 @@ RUN apt update && apt upgrade -y && apt dist-upgrade -y
 RUN apt install php7.0 php7.0-fpm php7.0-gd php7.0-memcached php7.0-curl php7.0-mysql \
     php7.0-mysqlnd php7.0-intl php-pear php7.0-imagick php7.0-imap php7.0-mcrypt \
     php7.0-ming php7.0-ps php7.0-pspell php7.0-recode php7.0-snmp php7.0-tidy php7.0-xmlrpc \
-    php7.0-xsl php7.0-apcu
+    php7.0-xsl php7.0-apcu -y
 
 #Copy configuration files
-COPY ./conf/
-COPY ./
+COPY ./conf/www.conf /etc/php7.0/fpm/pool.d/www.conf
+COPY ./conf/docker-entrypoint /docker-entrypoint
+
+RUN chmod +x /docker-entrypoint
 
 #Cleaning container
 RUN apt-get clean && \
