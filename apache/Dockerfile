@@ -8,14 +8,14 @@ MAINTAINER "Alberto Andrades Gil" "alberto.andrades.gil@gmail.com"
 RUN apt update && apt upgrade -y && apt dist-upgrade -y
 
 #Install Apache Web Server and PHP dependencies
-RUN apt install apache2 libapache2-mod-fastcgi -y
+RUN apt install apache2 libapache2-mod-fcgid -y
 
 #Copy configuration files
 COPY ./conf/php7.0-fpm.conf /etc/apache2/conf-available/
 COPY ./conf/drupal.conf /etc/apache2/sites-available/
 
 #Setup web server
-RUN a2enmod fastcgi actions alias && a2enconf php7.0-fpm && a2dissite 000-default && a2ensite drupal
+RUN a2enmod fcgid actions alias && a2enconf php7.0-fpm && a2dissite 000-default && a2ensite drupal
 
 #Cleaning container
 RUN apt-get clean && \
