@@ -3,7 +3,7 @@
 CONTAINER_IP=$(ip -o -4 addr show dev eth0 | sed 's/.* inet \([^/]*\).*/\1/')
 
 # PHP7.0-FPM configuration
-sed -i "s/#CONTAINER_IP/$CONTAINER_IP/" /etc/php7.0/fpm/pool.d/www.conf
+sed -i "s/#CONTAINER_IP/$CONTAINER_IP/" /etc/php/7.0/fpm/pool.d/www.conf
 killall php-fpm7.0
 mkdir -p /var/www
 php-fpm7.0
