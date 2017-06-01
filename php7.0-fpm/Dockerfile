@@ -14,7 +14,7 @@ RUN apt install php7.0 php7.0-fpm php7.0-gd php7.0-memcached php7.0-curl php7.0-
     php7.0-xsl php7.0-apcu wget -y
 
 #Copy configuration files
-COPY ./conf/www.conf /etc/php7.0/fpm/pool.d/www.conf
+COPY ./conf/www.conf /etc/php/7.0/fpm/pool.d/www.conf
 COPY ./conf/docker-entrypoint /docker-entrypoint
 
 RUN chmod +x /docker-entrypoint

@@ -3,10 +3,10 @@
 CONTAINER_IP=$(ip -o -4 addr show dev eth0 | sed 's/.* inet \([^/]*\).*/\1/')
 
 # PHP7.0-FPM configuration
-sed -i "s/#CONTAINER_IP/$CONTAINER_IP/" /etc/php5/fpm/pool.d/www.conf
-killall php7.0-fpm
+sed -i "s/#CONTAINER_IP/$CONTAINER_IP/" /etc/php7.0/fpm/pool.d/www.conf
+killall php-fpm7.0
 mkdir -p /var/www
-php7.0-fpm
+php-fpm7.0
 
 #Download drupal
 wget https://ftp.drupal.org/files/projects/drupal-8.3.2.tar.gz
