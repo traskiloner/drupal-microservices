@@ -15,7 +15,7 @@ COPY ./conf/drupal.conf /etc/apache2/sites-available/
 COPY ./conf/docker-entrypoint /docker-entrypoint
 
 #Setup web server
-RUN a2enmod actions alias proxy_fcgi && a2dissite 000-default && a2ensite drupal
+RUN a2enmod rewrite actions alias proxy_fcgi && a2dissite 000-default && a2ensite drupal
 
 #Download CMS Drupal 8
 RUN wget https://ftp.drupal.org/files/projects/drupal-8.3.2.tar.gz && \
