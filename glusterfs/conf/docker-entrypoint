@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#Check if volume exists and share volume
+
+if [ ! -d /apache-fpm ]
+then
+	#Create folder to volume
+	mkdir /apache-fpm
+
+	#Create volume on glusterfs and share
+	glusterd
+	gluster volume create apache-fpm-vol transport tcp $(hostname):/gluster_vol force
+	gluster volume start apache-fpm-vol
+
+else
+	#Share volumen on startup
+	gluster volume start apache-fpm-vol
+fi
