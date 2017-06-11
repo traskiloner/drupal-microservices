@@ -17,13 +17,6 @@ COPY ./conf/docker-entrypoint /docker-entrypoint
 #Setup web server
 RUN a2enmod rewrite actions alias proxy_fcgi && a2dissite 000-default && a2ensite drupal
 
-#Download CMS Drupal 8
-RUN wget https://ftp.drupal.org/files/projects/drupal-8.3.2.tar.gz && \
-    tar -zxf drupal-8.3.2.tar.gz && \
-    mv drupal-8.3.2 /var/www/drupal && \
-    rm -r drupal-8.3.2.tar.gz /var/www/html && \
-    chown -R www-data:www-data /var/www/drupal
-
 #Cleaning container
 RUN apt-get clean && \
     apt-get autoclean && \
