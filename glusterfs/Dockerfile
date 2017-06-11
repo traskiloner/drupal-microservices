@@ -12,6 +12,7 @@ RUN apt install glusterfs-server -y
 
 #Copy script setup volume to share
 COPY ./conf/docker-entrypoint /docker-entrypoint
+RUN chmod +x /docker-entrypoint
 
 #Cleaning container
 RUN apt-get clean && \

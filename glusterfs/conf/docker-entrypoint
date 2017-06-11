@@ -9,7 +9,7 @@ then
 
 	#Create volume on glusterfs and share
 	glusterd
-	gluster volume create apache-fpm-vol transport tcp $(hostname):/gluster_vol force
+	gluster volume create apache-fpm-vol transport tcp $(hostname):/apache-fpm force
 	gluster volume start apache-fpm-vol
 
 else
