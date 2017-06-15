@@ -11,8 +11,11 @@ then
 fi
 
 #Change ip php listener
-ipaddr=$(dig +short phpfpm)
+#ipaddr=$(dig +short phpfpm)
 sed -i "s/FPMADDR/$ipaddr/g" /etc/apache2/sites-available/drupal.conf
+
+#Change port
+sed -i "s/80/8080/g" /etc/apache2/ports.conf
 
 #Start apache proccess
 killall apache2
