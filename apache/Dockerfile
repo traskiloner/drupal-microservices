@@ -26,7 +26,7 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 #Port to expose
-EXPOSE 80
+EXPOSE 8080
 
 #Memory limit
 CMD ["-m","512"]
