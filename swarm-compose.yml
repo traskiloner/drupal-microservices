@@ -1,0 +1,38 @@
+---
+version: "3.0"
+
+services:
+
+  varnish:
+    image: traskiloner/drupal8:varnish_v2
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 2
+
+  apache:
+    image: traskiloner/drupal8:apache_v2
+    volumes:
+      - "apache-fpm:/var/www"
+    deploy:
+      replicas: 3
+
+  phpfpm:
+    image: traskiloner/drupal8:phpfpm_v2
+    volumes:
+      - "apache-fpm:/var/www"
+    deploy:
+      replicas: 3
+
+  memcached:
+    image: traskiloner/drupal8:memcached_v2
+
+volumes:
+  apache-fpm:
+    driver: local
+    driver_opts:
+     o: bind
+     type: none
+     device: /mnt/apache-fpm-vol
+...
+

@@ -34,6 +34,6 @@ CMD ["-m","512"]
 #User to run apache master proccess
 USER root
 
-#Entrypoint
+#Entrypoint configuration
 RUN chmod +x /docker-entrypoint
 ENTRYPOINT ["/docker-entrypoint"]

@@ -11,9 +11,7 @@ RUN apt update && apt upgrade -y && apt dist-upgrade -y
 RUN apt install varnish dnsutils -y
 
 #Copy configuration files
-COPY ./conf/docker-entrypoint /docker-entrypoint
 COPY ./conf/default.vcl /etc/varnish/default.vcl
-RUN chmod u+x /docker-entrypoint
 
 #Cleaning container
 RUN apt-get clean && \
@@ -32,5 +30,5 @@ CMD ["-m","512"]
 #User to run Varnish master proccess
 USER root
 
-#Entrypoint configuration
-ENTRYPOINT ["/docker-entrypoint"]
+#Run Varnish proccess
+CMD ["/usr/sbin/varnishd -F -a :80 -T localhost:6082 -f /etc/varnish/default.vcl -S /etc/varnish/secret -s malloc,256m"]
