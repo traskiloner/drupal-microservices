@@ -1,8 +1,9 @@
-# Stack deployment with Docker Swarm of Druapl 8
+# Stack deployment with Docker Swarm of Drupal 8
 
 ### Requirements:
 
-Docker version 1.13.1
+- Docker version 1.13.1
+- Swarm manager node 
 
 ### How to:
 To run this stack 
