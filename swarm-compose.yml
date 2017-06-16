@@ -8,24 +8,35 @@ services:
     ports:
       - "80:80"
     deploy:
-      replicas: 2
+      replicas: 1
 
   apache:
     image: traskiloner/drupal8:apache_v2
     volumes:
       - "apache-fpm:/var/www"
     deploy:
-      replicas: 3
+      replicas: 1
 
   phpfpm:
     image: traskiloner/drupal8:phpfpm_v2
     volumes:
       - "apache-fpm:/var/www"
     deploy:
-      replicas: 3
+      replicas: 1
 
   memcached:
     image: traskiloner/drupal8:memcached_v2
+
+  galera:
+    image: toughiq/mariadb-cluster
+    deploy:
+      replicas: 1
+    environment:
+      - DB_SERVICE_NAME=galera
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=drupaldb
+      - MYSQL_USER=dbuser
+      - MYSQL_PASSWORD=dbpassword
 
 volumes:
   apache-fpm:
@@ -35,4 +46,5 @@ volumes:
      type: none
      device: /mnt/apache-fpm-vol
 ...
+
 
